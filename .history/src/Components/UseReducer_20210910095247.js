@@ -9,13 +9,8 @@ const cartReducer = (state, action) => {
     case "addToCart": {
       // console.log("state", state)
       let cartUpdate = [...state];
-      let index = cartUpdate.findIndex(itemCart => {
-        return itemCart.id === action.item.id;
-      })
+      let index = cartUpdate.findIndex(itemCart => itemCart.id === action.item.id)
       if (index !== -1) {
-        console.log(cartUpdate[index])
-        // anh ranh thi demo bai nay giup e duoc khong a, ok  da e cam on e c
-        // gửi mình source code bài này đi dạ
         // cartUpdate = cartUpdate.map((item, key) => {
         //   if (index !== key) {
         //     return item
@@ -24,9 +19,6 @@ const cartReducer = (state, action) => {
         //   itemCart.quantity++;
         //   return itemCart;
         // })
-        cartUpdate[index].quantity++;
-
-        // ma duoi thi khong duoc :)))
         // Truoc khi tang
         // console.log("quantity: truoc ", cartUpdate[index].quantity)
         // console.log("arr: truoc ", cartUpdate)
@@ -40,7 +32,6 @@ const cartReducer = (state, action) => {
         cartUpdate.push(itemCart)
       }
       // console.log(cartUpdate)
-
       return [...cartUpdate]
     }
     default: return [...state];
@@ -55,6 +46,7 @@ let arrProduct = [
 export default function UseReducer() {
 
   const [cart, dispatch] = useReducer(cartReducer, initialReducer);
+
   const addToCart = (itemClick) => {
     const action = {
       type: "addToCart",

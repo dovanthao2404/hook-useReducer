@@ -1,45 +1,22 @@
 import React, { useReducer } from 'react'
 
 const initialReducer = [
-  // { id: 1, name: "Iphone", price: 1000, quantity: 1 }
+  { id: 1, name: "Iphone", price: 1000, quantity: 1 }
 ];
 
 const cartReducer = (state, action) => {
   switch (action.type) {
     case "addToCart": {
-      // console.log("state", state)
+      console.log(state)
       let cartUpdate = [...state];
-      let index = cartUpdate.findIndex(itemCart => {
-        return itemCart.id === action.item.id;
-      })
+      let index = cartUpdate.findIndex(itemCart => itemCart.id === action.item.id)
       if (index !== -1) {
-        console.log(cartUpdate[index])
-        // anh ranh thi demo bai nay giup e duoc khong a, ok  da e cam on e c
-        // gửi mình source code bài này đi dạ
-        // cartUpdate = cartUpdate.map((item, key) => {
-        //   if (index !== key) {
-        //     return item
-        //   }
-        //   const itemCart = { ...item }
-        //   itemCart.quantity++;
-        //   return itemCart;
-        // })
-        cartUpdate[index].quantity++;
-
-        // ma duoi thi khong duoc :)))
-        // Truoc khi tang
-        // console.log("quantity: truoc ", cartUpdate[index].quantity)
-        // console.log("arr: truoc ", cartUpdate)
-        // Tang
-        // cartUpdate[index].quantity++;
-        // Sau khi tang
-        // console.log("quantity: sau ", cartUpdate[index].quantity)
-        // console.log("arr: sau ", cartUpdate)
+        cartUpdate[index].quantity += 1;
+        console.log(cartUpdate)
       } else {
         const itemCart = { ...action.item, quantity: 1 };
-        cartUpdate.push(itemCart)
+        cartUpdate = [...cartUpdate, itemCart];
       }
-      // console.log(cartUpdate)
 
       return [...cartUpdate]
     }
@@ -55,6 +32,7 @@ let arrProduct = [
 export default function UseReducer() {
 
   const [cart, dispatch] = useReducer(cartReducer, initialReducer);
+
   const addToCart = (itemClick) => {
     const action = {
       type: "addToCart",
@@ -62,7 +40,6 @@ export default function UseReducer() {
     }
     dispatch(action)
   }
-  // console.log("return", cart)
   return (
     <div className="container">
       <div className="row">
@@ -95,15 +72,12 @@ export default function UseReducer() {
         </thead>
         <tbody>
           {cart.map((product, key) => {
-            const newProduct = { ...product };
-            const total = newProduct.quantity * newProduct.price
-            // console.log("newProduct", newProduct.quantity)
             return <tr key={key}>
-              <td>{newProduct.id}</td>
-              <td>{newProduct.name}</td>
-              <td>{newProduct.price}</td>
-              <td>{console.log("quantity td: ", newProduct.quantity,) || newProduct.quantity}</td>
-              <td>{total}</td>
+              <td>{product.id}</td>
+              <td>{product.name}</td>
+              <td>{product.price}</td>
+              <td>{product.quantity}</td>
+              <td>{product.quantity * product.price}</td>
               <td> <button className="btn btn-danger">X</button></td>
             </tr>
           })}

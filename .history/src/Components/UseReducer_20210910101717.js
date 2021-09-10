@@ -14,8 +14,7 @@ const cartReducer = (state, action) => {
       })
       if (index !== -1) {
         console.log(cartUpdate[index])
-        // anh ranh thi demo bai nay giup e duoc khong a, ok  da e cam on e c
-        // gửi mình source code bài này đi dạ
+
         // cartUpdate = cartUpdate.map((item, key) => {
         //   if (index !== key) {
         //     return item
